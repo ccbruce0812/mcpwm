@@ -33,7 +33,7 @@ static void onTimer(void) {
 		//Adopt latest mark value at cycle beginning
 		if(!g_context.count)
 			marks[i]=g_context.pins[i].mark;
-		gpio_write(g_context.pins[i].pin, g_context.count<marks[i]?true:false);
+		gpio_write(g_context.pins[i].pin, g_context.count<=marks[i]?true:false);
 	}
 	
 	g_context.count=(g_context.count+1)%max;
@@ -116,8 +116,8 @@ int MCPWM_setMark(unsigned char pin, unsigned int mark) {
 		return -1;
 	}
 	
-	if(mark>max)
-		mark=max;
+	if(mark>max-1)
+		mark=max-1;
 	
     timer_set_interrupts(FRC1, false);
 	g_context.pins[pin].mark=mark;
