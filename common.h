@@ -47,6 +47,8 @@ extern "C" {
 #include <string.h>
 #include <assert.h>
 
+#define MSEC2TICKS(n) (n/portTICK_PERIOD_MS)
+
 #ifndef MCPWM_NDEBUG
 static inline int __dbg__(const char *loc, const char *fmt, ...) {
 	va_list args;
