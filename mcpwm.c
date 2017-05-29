@@ -30,7 +30,7 @@ static void onTimer(void) {
 	int i=0;
 
 	for(i=0;i<g_context.pinCount;i++) {
-		if(g_context.count<=g_context.pins[i].mark) {
+		if(g_context.pins[i].mark && g_context.count<=g_context.pins[i].mark) {
 			if(!g_context.pins[i].level) {
 				g_context.pins[i].level=true;
 				gpio_write(g_context.pins[i].pin, g_context.pins[i].level);
