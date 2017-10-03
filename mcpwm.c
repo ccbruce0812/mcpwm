@@ -25,7 +25,7 @@ static struct {
 	unsigned char pinCount;
 } g_context;
 
-static void onTimer(void) {
+static void onTimer(void *arg) {
 	unsigned int max=1<<g_context.res;
 	int i=0;
 
@@ -93,7 +93,7 @@ int MCPWM_init(unsigned int freq, unsigned int div, unsigned int res, unsigned c
 	timer_set_divider(FRC1, g_context.div);
 	timer_set_load(FRC1, g_context.load);
     timer_set_reload(FRC1, true);
-	_xt_isr_attach(INUM_TIMER_FRC1, onTimer);
+	_xt_isr_attach(INUM_TIMER_FRC1, onTimer, NULL);
 	
 	//Start
     timer_set_interrupts(FRC1, true);
